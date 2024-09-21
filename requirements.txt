@@ -10,4 +10,4 @@ openai
 tiktoken
 pinecone-client
 streamlit-chat==0.0.2.2
-sentence-transformers
+sentence-transformers==2.2.2 
