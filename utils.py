@@ -3,6 +3,7 @@ import os
 import streamlit as st
 from pinecone import Pinecone as PineconeClient
 from langchain.vectorstores import Pinecone
+from langchain.embeddings import OpenAIEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from groq import Groq
 from langchain.document_loaders import DirectoryLoader
@@ -12,6 +13,8 @@ import pickle
 # Load environment variables
 load_dotenv()
 pkey = st.secrets["PINECONE_API_KEY"]
+KEY=st.secrets["OPENAI_API_KEY"]
+model=OpenAIEmbeddings(api_key=KEY)
 
 # Function to download or load embeddings
 def download_embeddings():
@@ -32,7 +35,7 @@ def download_embeddings():
 # Function to find a match using Pinecone and embeddings
 def find_match(input_text):
     pc = PineconeClient(api_key=pkey)
-    model = download_embeddings()
+    
     
     # Ensure the Pinecone index is correctly initialized
     index_name = 'startupworld-chatbot'
